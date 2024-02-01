@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload and Display</title>
+</head>
+<body>
+
+<!-- Form to upload an image -->
+<form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" id="imageInput" accept="image/*">
+    <button type="button" onclick="uploadImage()">Upload Image</button>
+</form>
+
+<!-- Display the uploaded image -->
+<div id="imageContainer">
+    <img id="uploadedImage" alt="Uploaded Image">
+</div>
+
+<script>
+function uploadImage() {
+    // Get the input element and selected file
+    var input = document.getElementById('imageInput');
+    var file = input.files[0];
+
+    if (file) {
+        // Create a FileReader object to read the file
+        var reader = new FileReader();
+
+        // Set a callback function to execute when the file is read
+        reader.onload = function(e) {
+            // Get the image container and set the source of the image element
+            var imageContainer = document.getElementById('imageContainer');
+            var uploadedImage = document.getElementById('uploadedImage');
+            uploadedImage.src = e.target.result;
+
+            // Show the image container
+            imageContainer.style.display = 'block';
+        };
+
+        // Read the file as a data URL
+        reader.readAsDataURL(file);
+    } else {
+        alert('Please select an image file.');
+    }
+}
+</script>
+
+</body>
+</html>
+
